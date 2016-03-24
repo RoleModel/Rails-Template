@@ -8,7 +8,8 @@ module RMSTemplate
   class AppGenerator < Rails::Generators::AppGenerator
     attr_accessor :use_devise
 
-    # NOTE: We have to tell it not to run ourselves... again, otherwise... error
+    # NOTE: We have to tell it not to run ourselves... again, otherwise we
+    # get an error. This only happens if you call this file as a Template!
     def apply_rails_template
     end
 
