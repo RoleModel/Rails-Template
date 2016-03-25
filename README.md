@@ -18,7 +18,7 @@ The current Ruby Version for this template is 2.3.0.
 
 ### Rails Version
 
-The current Rails Version for this template is 4.2.6.
+The current Rails Version for this template is 4.2.x.
 
 ### Web Server
 

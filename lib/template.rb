@@ -29,10 +29,6 @@ after_bundle do
   generate 'spinach'
 end
 
-RMSTemplate::FILES.each do |filename|
-  template(filename, force: force_our_files)
-end
-
 # Set up Git Repo, if desired
 if yes?('Set up Git Repo?')
   after_bundle do
@@ -41,6 +37,12 @@ if yes?('Set up Git Repo?')
     git commit: ' -m "Initial commit"'
   end
 end
+
+# Source all our template files, force if desired
+RMSTemplate::FILES.each do |filename|
+  template(filename, force: force_our_files)
+end
+
 
 # Since we have a .ruby-version file being added ... if we don't match,
 # bundle install will fail (or install on the wrong Ruby version). So
