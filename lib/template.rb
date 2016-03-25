@@ -23,8 +23,10 @@ if (@use_devise = yes?('Install Devise?'))
   end
 end
 
+# Set up test frameworks
 after_bundle do
   generate 'rspec:install'
+  generate 'spinach'
 end
 
 RMSTemplate::FILES.each do |filename|

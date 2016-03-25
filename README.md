@@ -7,7 +7,7 @@ default settings.
 
 This template assumes that you have Rails installed!
 ```
-rails new app_name -m https://github.com/RoleModel/RailsTemplate/rails-template.rb
+rails new app_name -m https://github.com/RoleModel/Rails-Template/lib/template.rb
 ```
 
 ## Ruby/Rails Setup

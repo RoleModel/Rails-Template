@@ -31,6 +31,7 @@ group :development, :test do
   gem 'mailcatcher'
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'spinach-rails'
   gem 'timecop'
   gem 'better_errors'
   gem 'binding_of_caller'
