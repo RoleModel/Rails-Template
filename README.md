@@ -40,7 +40,7 @@ Currently, this template provides Devise as an option.
 
 ### View Templates
 
-Slim?
+Slim is currently the preferred Rails View template gem.
 
 ## Docker
 

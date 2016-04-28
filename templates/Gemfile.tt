@@ -3,45 +3,63 @@ source 'https://rubygems.org'
 ruby '<%= RMSTemplate::RUBY_VERSION %>'
 
 gem 'rails_12factor', group: :production
+# Latest stable version that we know will work with the rest of our gems
 gem 'rails', '~> 4.2.0'
+# PostgreSQL database by default
 gem 'pg'
 
-gem 'sass-rails', '~> 4.0.0'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0'
+# Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'jquery-rails'
-gem 'slim'
-gem 'unicorn'
-gem 'react-rails', '~> 1.4.0'
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 4.1.0'
+# See https://github.com/rails/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
 
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+# Use Slim templates for Views
+gem 'slim'
+
+# TODO: Add Note Here
 gem 'foreman'
 
-gem 'harvested'
-gem 'chronic'
-gem 'progressbar'
-gem 'redcarpet'
+# Rails 5 utilizes Puma for its web server
+gem 'puma'
 
-gem 'neat'
+# Better parsing of strings into Time objects
+gem 'chronic'
+
+# Application Monitoring
+gem 'skylight'
+# Exception Monitoring
+gem 'honeybadger', '~> 2.0'
 
 <%- if @use_devise %>
+# User Authentication
 gem 'devise'
 <%- end %>
 
 group :development, :test do
+  # Display development emails locally
   gem 'mailcatcher'
-  gem 'pry-rails'
+  # Debugging with Pry. Add 'binding.pry' to pause for debugging.
+  gem 'pry-byebug'
+  # Unit tests
   gem 'rspec-rails'
+  # Integration tests
   gem 'spinach-rails'
+  # Timecop to freeze time during tests
   gem 'timecop'
+  # Provide pretty error screens
   gem 'better_errors'
-  gem 'binding_of_caller'
+  # Silence JS / CSS lines from Rails' Server logging in Development mode
   gem 'quiet_assets'
-  gem 'rack-mini-profiler'
-  gem 'flamegraph'
-  gem 'stackprof'
-  gem 'librarian-ansible'
-  gem 'jasmine-rails'
+  # Linter for better Ruby code quality; see rubycop.yml
   gem 'rubocop'
+  # Audit Ruby code for security issues
   gem 'brakeman'
+  # Audit gems for security issues
   gem 'bundler-audit'
 end
