@@ -44,4 +44,4 @@ Slim is currently the preferred Rails View template gem.
 
 ## Docker
 
-TODO: Maybe?
+The template provides Docker setup as an option.  When this is selected bundler and the generators will be skipped so they can be run directly on the Docker container after running `docker-compose up`.

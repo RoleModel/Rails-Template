@@ -1,0 +1,23 @@
+postgres:
+  image: postgres:9.5
+  environment:
+    POSTGRES_USER: <%= @app_name %>
+    POSTGRES_PASSWORD: <%= @app_name %>
+    POSTGRES_DB: <%= @app_name %>_development
+  ports:
+    - '5433:5432'
+  volumes:
+    - <%= @app_name %>-postgres:/var/lib/postgresql/data
+
+web:
+  build: .
+  links:
+    - postgres
+  volumes:
+    - .:/<%= @app_name %>
+  ports:
+    - '3000:3000'
+  environment:
+    - PORT=3000
+    - DATABASE_URL=postgresql://<%= @app_name %>:<%= @app_name %>@postgres:5432/<%= @app_name %>_development?encoding=utf8&pool=5&timeout=5000
+    - TEST_DATABASE_URL=postgresql://<%= @app_name %>:<%= @app_name %>@postgres:5432/<%= @app_name %>_test?encoding=utf8&pool=5&timeout=5000
