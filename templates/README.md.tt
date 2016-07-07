@@ -1,0 +1,136 @@
+# Overview
+## Name and aliases
+The project is named "<UPDATE: insert name here>". Some will refer to it as simply "<UPDATE: insert name here>",
+which was the previous name of the company.
+
+## Purpose
+The system is designed to solve the problem of ...
+Users had the problem, but this system resolves it by ...
+
+## Technologies
+### Chosen
+* Ruby on Rails
+* Postgres
+* Nginx
+* Unicorn
+
+### Tried and rejected
+* Site5
+  * In an early deployment, we ran on shared hosting at Site5. They quickly gave users a service
+    unavailable message since we were getting too many requests in the given time.
+  * We also used Site5 for outgoing email. Maria wasn't receiving those outgoing emails because
+    Site5 was swallowing them and redirecting them to Site5's email server.
+* Rackspace
+  * Next deployment was to Rackspace, where the application lived for many years. Al and Maria
+    already used Rackspace in the past and liked their email service. Although we liked the
+    flexibility, using a PaaS seemed to be a better solution.
+
+## Technology relationships
+![Conceptual Diagram](docs/conceptual_diagram.png)
+
+Edit on [Google Drive](https://docs.google.com/drawings/d/15aGzkDBe60crzxXkQg0LPXxnDebqNQ2z-3DOsl46ZX0/edit)
+
+## Supported browsers
+<UPDATE: insert customer response here>
+
+# How to set up the project
+## Local Ruby
+```bash
+$ brew update --system
+$ brew upgrade ruby-build
+$ git clone http://github.com/RoleModel/<UPDATE: git project name here>
+$ cd <UPDATE: git project name here>
+$ rbenv install
+$ gem install bundle
+$ bundle install
+```
+
+### Copy Production DB
+The production DB is currently hosted on the Heroku Add-On "ClearDB MySQL". Run the commands below
+to import a copy of the production DB onto your local machine for development. Passwords are in the
+RM 1Password Vault under the <UPDATE: project name here> folder.
+
+```bash
+$ mysqldump --host=us-cdbr-iron-east-02.cleardb.net --user=<UPDATE: username here> --password <UPDATE: password here> > prod.sql
+$ mysql -u root <UPDATE: git project name here>_development < prod.sql
+```
+
+Note, Rails 3.2 isn't compatible with MySQL 5.7.3+ due to breaking changes in how NULL values in
+primary keys are handled. If you try to setup this project's DB on MySQL 5.7+, you'll get this
+error: `Mysql2::Error: All parts of a PRIMARY KEY must be NOT NULL` Fixed in Rails 4.1.
+(http://stackoverflow.com/questions/21075515/creating-tables-and-problems-with-primary-key-in-rails)
+
+
+### How to run locally
+```bash
+$ foreman start
+```
+
+### How to run tests
+```bash
+$ rake
+```
+
+## Troubleshooting information
+* [App Status Page](https://dashboard.heroku.com/apps) will give you information about what is running.
+* To view the logs and access a shell on the server use the [Heroku Toolbelt](https://toolbelt.heroku.com/)
+* Logs are stored in RM's Papertrail account, NOT the Papertrail Heroku add-on, so you'll need to
+  log directly into Papertrail to view the logs for this app.
+
+# Branching strategy
+To begin a new feature run, `git checkout -b <branchname>`.
+When finished with the feature and the code has been reviewed, the commits should be squashed before
+merging. See [RoleModel Best Practices](https://github.com/RoleModel/BestPractices) for more information.
+
+# List of background processes
+Background jobs are scheduled using the Heroku Scheduler add-on. All jobs are monitoring by
+Deadman's Snitch. Current jobs are listed below:
+
+* Daily job to ...
+* Hourly job to ...
+* Database backups are done by ClearDB every half hour and available for 5 days.
+
+# Links to:
+* [Git repo](http://github.com/RoleModel/<UPDATE: git project name here>)
+* [Task management system](https://trello.com/b/<UPDATE: project code here>)
+* [Production](https://<UPDATE: url here>/)
+* [CI](https://semaphoreci.com/rolemodel/<UPDATE: git project name here>)
+* [TBD: Core project presentation](http://docs.google.com)
+* [List of contributors](https://github.com/RoleModel/<UPDATE: git project name here>/graphs/contributors)
+
+## External services
+* [HoneyBadger](http://honeybadger.io)
+* [Skylight](http://skylight.io)
+* [SendGrid](http://sendgrid.com/RoleModel)
+* [Heroku](http://herokuapp.com)
+* [Deadman's Snitch](https://deadmanssnitch.com)
+
+<UPDATE: enable appropriate additional documentation here>
+<!-- ## Additional Documentation
+* [Certificate setup](./docs/certificates.md)
+* [Payment gateway configuration](./docs/ecommerce.md)
+* [Security concerns](./docs/security_concerns.md)
+* [Project history](./docs/project_history.md)
+* [Change log](./docs/change_log.md)
+* [Dictionary](./docs/terms.md)
+* [Frequently asked questions](./docs/faq.md) -->
+
+# Deployment
+## Strategy/process/commands
+Deployment is done from the Heroku dashboard. The `master` branch is always deployable. Each release
+should be tagged in Git using this format: `v2016-12-31` for documentation purposes.
+
+## Description of host(s), DNS, certificate authority
+GoDaddy manages the domain name, DNS, and SSL certificate for <UPDATE: url here>. The SSL is setup
+on Heroku using Heroku's SSL Endpoint add-on. The GoDaddy credentials are stored in RM's 1Password
+vault.
+
+## ssh information
+The [Heroku Toolbelt](https://toolbelt.heroku.com/) can be used to access the server and run one
+off commands.
+
+# Customer contacts
+* <UPDATE: customer name here> - <UPDATE: customer email here> <UPDATE: customer phone here>
+
+# Copyright & licensing
+Copyright (c) 2016 Closed Source @<UPDATE: project name here>
