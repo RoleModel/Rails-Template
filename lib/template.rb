@@ -8,6 +8,7 @@ module RMSTemplate
   RUBY_VERSION = '2.3.1'.freeze
   FILES = %w(
     .rubocop.yml
+    README.md.tt
     Gemfile.tt
     .ruby-version.tt
     docker-compose.yml.tt
