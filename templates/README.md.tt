@@ -1,6 +1,6 @@
 # Overview
 ## Name and aliases
-The project is named "<UPDATE: insert name here>". Some will refer to it as simply "<UPDATE: insert name here>",
+The project is named "<%= app_name.titleize %>". Some will refer to it as simply "<%= app_name.titleize %>",
 which was the previous name of the company.
 
 ## Purpose
@@ -38,8 +38,8 @@ Edit on [Google Drive](https://docs.google.com/drawings/d/15aGzkDBe60crzxXkQg0LP
 ```bash
 $ brew update --system
 $ brew upgrade ruby-build
-$ git clone http://github.com/RoleModel/<UPDATE: git project name here>
-$ cd <UPDATE: git project name here>
+$ git clone http://github.com/RoleModel/<%= app_name %>
+$ cd <%= app_name %>
 $ rbenv install
 $ gem install bundle
 $ bundle install
@@ -48,11 +48,11 @@ $ bundle install
 ### Copy Production DB
 The production DB is currently hosted on the Heroku Add-On "ClearDB MySQL". Run the commands below
 to import a copy of the production DB onto your local machine for development. Passwords are in the
-RM 1Password Vault under the <UPDATE: project name here> folder.
+RM 1Password Vault under the <%= app_name %> folder.
 
 ```bash
 $ mysqldump --host=us-cdbr-iron-east-02.cleardb.net --user=<UPDATE: username here> --password <UPDATE: password here> > prod.sql
-$ mysql -u root <UPDATE: git project name here>_development < prod.sql
+$ mysql -u root <%= app_name.parameterize.underscore %>_development < prod.sql
 ```
 
 Note, Rails 3.2 isn't compatible with MySQL 5.7.3+ due to breaking changes in how NULL values in
@@ -91,12 +91,12 @@ Deadman's Snitch. Current jobs are listed below:
 * Database backups are done by ClearDB every half hour and available for 5 days.
 
 # Links to:
-* [Git repo](http://github.com/RoleModel/<UPDATE: git project name here>)
+* [Git repo](http://github.com/RoleModel/<%= app_name %>)
 * [Task management system](https://trello.com/b/<UPDATE: project code here>)
 * [Production](https://<UPDATE: url here>/)
-* [CI](https://semaphoreci.com/rolemodel/<UPDATE: git project name here>)
+* [CI](https://semaphoreci.com/rolemodel/<%= app_name %>)
 * [TBD: Core project presentation](http://docs.google.com)
-* [List of contributors](https://github.com/RoleModel/<UPDATE: git project name here>/graphs/contributors)
+* [List of contributors](https://github.com/RoleModel/<%= app_name %>/graphs/contributors)
 
 ## External services
 * [HoneyBadger](http://honeybadger.io)
@@ -133,4 +133,4 @@ off commands.
 * <UPDATE: customer name here> - <UPDATE: customer email here> <UPDATE: customer phone here>
 
 # Copyright & licensing
-Copyright (c) 2016 Closed Source @<UPDATE: project name here>
+Copyright (c) 2016 Closed Source @ <%= app_name.titleize %>
