@@ -7,13 +7,16 @@ source_paths << templates_root
 module RMSTemplate
   RUBY_VERSION = '2.3.1'.freeze
   FILES = %w(
-    .rubocop.yml
     README.md.tt
     Gemfile.tt
     .ruby-version.tt
     docker-compose.yml.tt
     Dockerfile.tt
-  )
+    .rubocop.yml
+    .eslintignore
+    .eslintrc.js
+    lib/tasks/lint.rake.tt
+  ).freeze
 end
 
 force_our_files = yes?('Automatically overwrite default Rails files?')
@@ -45,10 +48,18 @@ if yes?('Set up Git Repo?')
   end
 end
 
+# Set up Linter tasks
+@fail_linter_builds = yes?('Should CI fail builds when Linters have errors?')
+
 # Source all our template files, force if desired
 RMSTemplate::FILES.each do |filename|
   template(filename, force: force_our_files)
 end
+
+append_to_file '.gitignore', <<-IGNORERUBOCOP.strip_heredoc
+  # Ignore Rubocop's local copy of our shared Rubocop config
+  .rubocop-https*
+IGNORERUBOCOP
 
 if (@use_docker = yes?('Set up Docker?'))
   def run_bundle

@@ -1,0 +1,15 @@
+require 'rubocop/rake_task'
+require 'bundler/audit/task'
+require 'scss_lint/rake_task'
+
+desc 'Run all linters against the project'
+task lint: %w(bundle:audit rubocop scss_lint eslint:run)
+
+Bundler::Audit::Task.new
+
+RuboCop::RakeTask.new(:rubocop) do |task|
+  task.fail_on_error = <%= @fail_linter_builds %>
+end
+<%# TODO: We can make it quiet, which means no output, but not 'pass anyway'? %>
+SCSSLint::RakeTask.new
+<%# TODO: Would be nice if we could config ESLint... %>
