@@ -3,13 +3,30 @@ require 'bundler/audit/task'
 require 'scss_lint/rake_task'
 
 desc 'Run all linters against the project'
-task lint: %w(bundle:audit rubocop scss_lint eslint:run)
-
-Bundler::Audit::Task.new
+task :lint do
+  # Since only some linters can be configured to fail silently (passing exit
+  # code), we need to manually invoke all tasks and rescue their exit status.
+  # Passing linters will not show in the summary output.
+  exit_codes = {}
+  %w(bundle:audit rubocop scss_lint eslint:run).map do |task_name|
+    begin
+      Rake::Task[task_name].invoke
+    rescue SystemExit => ex
+      exit_codes[task_name] = ex.status
+    end
+  end
+  exit_codes.each do |task_name, exit_code|
+    puts "* #{task_name.titleize} exited with status code #{exit_code}"
+  end
+  <%- if @fail_linter_builds -%>
+  # Exit with a failing status code
+  abort if exit_codes.any?
+  <%- end -%>
+end
 
 RuboCop::RakeTask.new(:rubocop) do |task|
   task.fail_on_error = <%= @fail_linter_builds %>
 end
-<%# TODO: We can make it quiet, which means no output, but not 'pass anyway'? %>
+
 SCSSLint::RakeTask.new
-<%# TODO: Would be nice if we could config ESLint... %>
+<%# TODO: Would be nice if we could config ESLint... -%>
