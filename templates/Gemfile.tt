@@ -58,8 +58,13 @@ group :development, :test do
   gem 'better_errors'
   # Silence JS / CSS lines from Rails' Server logging in Development mode
   gem 'quiet_assets'
-  # Linter for better Ruby code quality; see rubycop.yml
-  gem 'rubocop'
+  # Linter for better Ruby code quality; see .rubocop.yml
+  gem 'rubocop', require: false
+  # Linter for better JS code quality; see .eslintrc
+  gem 'eslint-rails'
+  # Linter for better CSS code quality;
+  # see https://github.com/brigade/scss-lint/blob/master/config/default.yml
+  gem 'scss_lint', require: false
   # Audit Ruby code for security issues
   gem 'brakeman'
   # Audit gems for security issues
