@@ -4,9 +4,42 @@ This template aids Rails in setting up a new project with some standardized
 default settings.
 
 ## Using This Template
+The ruby and rails versions here are not the latest versions. (TODO: update this template...) To use as-is:
 
-This template assumes that you have Rails installed!
+1. Make sure you have exactly Ruby version 2.3.1 installed. All other versions will fail the template installation.
+```bash
+rbenv versions
 ```
+If you don't have 2.3.1:
+```bash
+rbenv install 2.3.1
+gem install rails // since every Ruby version needs its own Rails
+```
+
+2. In the parent directory above where you want to put your new project, set it to use this Ruby version:
+```bash
+rbenv local 2.3.1
+```
+
+3. Clone this directory:
+```bash
+git clone https://github.com/RoleModel/Rails-Template.git rolemodel-rails-template
+```
+
+4. Start your Rails project using the template from this directory:
+```bash
+rails new hello_world -m rolemodel-rails-template/lib/template.rb
+```
+Don't worry if you see errors like: `Could not find gem 'rails_12factor' in any of the gem sources listed in your Gemfile`. The next step will take care of it.
+
+5. Run bundle install in your project directory:
+```bash
+cd hello_world
+bundle install
+```
+
+Someday, instead of the above, we'd like to be able to do this, but it DOES NOT WORK right now:
+```bash
 rails new app_name -m https://raw.githubusercontent.com/RoleModel/Rails-Template/master/lib/template.rb
 ```
 
